@@ -9,9 +9,7 @@ exports.members = function(req,res) {
 };
 
 //TODO:
-// /members PUT
 // /members DELETE
-
 
 // /member/id GET
 exports.member = function(req, res) {

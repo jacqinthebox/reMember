@@ -1,9 +1,15 @@
-<html>
-<head>
-<title>Still empty</title>
-</head>
-<body>
-<h1>Still empty..</h1>
-<p>But we're getting there..</p>
-</body>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="reMemberApp">
+  <head>
+        <title>reMember</title>
+      </head>
+      <!-- in the body we inject the WelcomeController: -->
+        <body ng-controller="WelcomeController">
+        
+        <!-- We want to display $scope.title: -->
+     <h1>{{title}}</h1>
+       
+     <script src="javascripts/vendor/angular/angular.min.js"></script>
+     <script src="javascripts/app.js"></script>
+  </body>
 </html>
