@@ -37,7 +37,7 @@ rap.controller('NavController', function ($scope,$http) {
 
  
 rap.controller('WelcomeController', function ($scope,$http) {
-        $scope.clubname = "Tennisclub";
+        $scope.clubname = "Knitting Association";
 });
 
 rap.controller('AdminController', function ($scope,$http) {
