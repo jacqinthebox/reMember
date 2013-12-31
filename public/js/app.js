@@ -20,12 +20,13 @@ rap.config(function ($routeProvider) {
             controller: 'MemberController'
         }).
 
+/*
 		when('/logon',
         {
             templateUrl: 'partials/logon.html',
             controller: 'LogonController'
         }).
-
+*/
         otherwise( { redirecTo: '/'})
 
 });

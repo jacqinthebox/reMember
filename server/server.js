@@ -3,17 +3,30 @@ var http = require('http');
 var path = require('path');
 
 var mongoose = require('mongoose');
+
+
+//!!! added for passport
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var Member = require('./models/Member');
-var api = require('./routes/api');
+
+
 var app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.use(express.favicon());
-app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(express.logger());
 app.use(express.methodOverride());
+app.use(express.cookieParser());
+
+//!!! added for passport
+app.use(express.session({ secret: 'keyboard cat' }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(app.router);
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -22,15 +35,18 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+//!!! added for passport
+passport.use(new LocalStrategy(Member.authenticate()));
+passport.serializeUser(Member.serializeUser());
+passport.deserializeUser(Member.deserializeUser());
+
+
 mongoose.connect('mongodb://localhost:27017/local');
 
-app.get('/members', api.members);
-app.get('/member/:id', api.member );
-app.post('/member', api.saveMember);
-app.put('/member/:id', api.editMember);
 
+//!!! moved the routes to separate file
+var api = require('./routes/api')(app);
 
-//default route
 app.all('/', function(req, res) {
   res.sendfile('index.html', { root: "../public" });
 });
