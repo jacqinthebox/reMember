@@ -13,31 +13,37 @@ module.exports = function (app) {
 
   app.get('/login', function(req, res) {
     if(req.user) {
-      res.send(req.user.username);
-     } else {
+      res.send(req.user);
+    } else {
       res.send(401);
-     }
+    }
   });
 
 
   app.post('/register', function (req, res) {
-    Member.register(new Member({ username : req.body.username }), req.body.password, function(err, member) {
+    Member.register(new Member({ username : req.body.username, nickname : req.body.nickname }), req.body.password, function(err, member) {
       if (err) {
         return res.send(err);
       }
-      res.send(member);       
+     // passport.authenticate('local')
+      res.redirect('/confirm.html');       
     });
   });
 
 
+  app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+  });
+
   //member section
   // /members GET
   app.get('/members',ensureAuthenticated, function(req,res) {
-  //  if(req.isAuthenticated){
-      Member.find({}, function(err, data) {
-        res.send(data);
-      });
- //   } else { res.redirect('/login') }
+    //  if(req.isAuthenticated){
+    Member.find({}, function(err, data) {
+      res.send(data);
+    });
+    //   } else { res.redirect('/login') }
   });
 
   // /member/id GET
