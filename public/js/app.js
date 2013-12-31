@@ -33,12 +33,16 @@ rap.config(function ($routeProvider) {
 
 rap.controller('NavController', function ($scope,$http) {
      $scope.title = "MEAN Member Application";
+     $http.get('http://localhost:3000/login').success(function(data) { $scope.member = data; });
+  
 
 });
 
  
 rap.controller('WelcomeController', function ($scope,$http) {
         $scope.clubname = "Knitting Association";
+         $http.get('http://localhost:3000/login').success(function(data) { $scope.member = data; });
+  
 });
 
 rap.controller('AdminController', function ($scope,$http) {
