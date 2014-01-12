@@ -7,7 +7,7 @@ module.exports = function (app) {
   //login section
   app.post('/login', passport.authenticate('local'), function(req, res) {
     if(req.user) {    
-      res.redirect('/');
+      res.send(req.user);
     }
   });
 
@@ -15,7 +15,8 @@ module.exports = function (app) {
     if(req.user) {
       res.send(req.user);
     } else {
-      res.send(401);
+      //console.log("user is not logged yet"); 
+      res.send(204);
     }
   });
 
