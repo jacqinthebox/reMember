@@ -12,6 +12,6 @@ This is a work in progress and an attempt to see if I can replace ASP.NET and C#
 
 Use NPM to install dependencies : ```npm install reMember/server```
 
-Then use Bower to install frontend frameworks: ```bower install angular angular-route bootstrap```
+Then use Bower to install frontend frameworks: ```bower install angular angular-route angular-resource bootstrap```
 
  
